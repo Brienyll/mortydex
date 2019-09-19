@@ -7,28 +7,25 @@ class App extends Component {
     super();
 
     this.state = {
-      character: [
-        {
-          name: 'Morty',
-          id: 'asdd2'
-        },
-        {
-          name: 'Jessica',
-          id: 'sadqw'
-        },
-        {
-          name: 'Beth',
-          id: '12dsc'
-        }
-      ]
+      count: [],
+      character: []
     };
+  }
+
+  componentDidMount() {
+    fetch('https://rickandmortyapi.com/api/character/?name=morty').then(
+      response =>
+        response
+          .json()
+          .then(name => this.setState({ character: name.results.slice(0, 8) }))
+    );
   }
 
   render() {
     return (
       <div className="App">
         {this.state.character.map(character => (
-          <h1> {character.name}</h1>
+          <h1 key={character.id}> {character.name}</h1>
         ))}
       </div>
     );
