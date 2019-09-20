@@ -7,8 +7,8 @@ class App extends Component {
     super();
 
     this.state = {
-      count: [],
-      character: []
+      characters: [],
+      images: []
     };
   }
 
@@ -17,18 +17,22 @@ class App extends Component {
       response =>
         response
           .json()
-          .then(name => this.setState({ character: name.results.slice(0, 8) }))
+          .then(name => this.setState({ characters: name.results.slice(0, 8) }))
+    );
+    fetch('https://rickandmortyapi.com/api/character/?name=morty').then(
+      response =>
+        response
+          .json()
+          .then(image => this.setState({ images: image.results.slice(0, 8) }))
     );
   }
-
   render() {
     return (
       <div className="App">
-        <CardList>
-          {this.state.character.map(character => (
-            <h1 key={character.id}> {character.name}</h1>
-          ))}
-        </CardList>
+        <CardList
+          characters={this.state.characters}
+          images={this.state.images}
+        />
       </div>
     );
   }
