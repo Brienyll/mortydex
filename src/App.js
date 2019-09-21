@@ -7,8 +7,7 @@ class App extends Component {
     super();
 
     this.state = {
-      characters: [],
-      images: []
+      characters: []
     };
   }
 
