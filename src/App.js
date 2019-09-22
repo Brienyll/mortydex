@@ -7,7 +7,8 @@ class App extends Component {
     super();
 
     this.state = {
-      characters: []
+      characters: [],
+      searchField: ''
     };
   }
 
@@ -19,12 +20,18 @@ class App extends Component {
     );
   }
   render() {
+    const { characters, searchField } = this.state;
+    const filteredCharacters = characters.filter(character =>
+      character.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div className="App">
-        <CardList
-          characters={this.state.characters}
-          images={this.state.images}
+        <input
+          type="search"
+          placeholder="search character"
+          onChange={e => this.setState({ searchField: e.target.value })}
         />
+        <CardList characters={filteredCharacters} />
       </div>
     );
   }
