@@ -28,6 +28,7 @@ class App extends Component {
     );
     return (
       <div className="App">
+        <h1> Rick & Morty </h1>
         <SearchBox
           placeholder="search character"
           handleChange={e => this.setState({ searchField: e.target.value })}
